@@ -74,6 +74,14 @@ const cartModule = {
       state.cart.total -= prodData.price * prodData.qty;
     }
   },
+  actions: {
+    addToCart(context, payload) {
+      const prodId = payload.id;
+      const products = context.rootState.product.products;
+      const product = products.find(product => product.id === prodId)
+      context.commit('addProductToCart', product)
+    }
+  },
   getters: {
     cartTotal(state) {
       return state.cart.total.toFixed(2)
