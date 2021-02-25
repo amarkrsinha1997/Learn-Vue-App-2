@@ -12,7 +12,7 @@
           <router-link to="/cart">Cart</router-link>
           <base-badge mode="elegant">{{ cart.qty }}</base-badge>
         </li>
-        <li v-if="isLoggedIn">
+        <li v-if="isAuth">
           <router-link to="/admin">Admin</router-link>
         </li>
       </ul>
@@ -26,10 +26,20 @@
 
 <script>
 export default {
-  inject: ['isLoggedIn', 'login', 'logout', 'cart'],
   computed: {
     isAuth() {
-      return this.isLoggedIn.value;
+      return this.$store.state.auth.isLoggedIn;
+    },
+    cart() {
+      return this.$store.state.cart.cart
+    }
+  },
+  methods: {
+    login() {
+      this.$store.commit('auth/login')
+    },
+    logout() {
+      this.$store.commit('auth/logout')
     }
   }
 };
