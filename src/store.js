@@ -73,6 +73,14 @@ const cartModule = {
       state.cart.qty -= prodData.qty;
       state.cart.total -= prodData.price * prodData.qty;
     }
+  },
+  getters: {
+    cartTotal(state) {
+      return state.cart.total.toFixed(2)
+    },
+    quantity(state) {
+      return state.cart.qty;
+    }
   }
 };
 
