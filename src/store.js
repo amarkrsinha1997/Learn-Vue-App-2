@@ -44,29 +44,29 @@ const cartModule = {
   },
   namespaced: true,
   mutations: {
-    addProductToCart(state, productData) {
+    addProductToCart(state, payload) {
       const productInCartIndex = state.cart.items.findIndex(
-        ci => ci.productId === productData.id
+        ci => ci.productId === payload.id
       );
 
       if (productInCartIndex >= 0) {
         state.cart.items[productInCartIndex].qty++;
       } else {
         const newItem = {
-          productId: productData.id,
-          title: productData.title,
-          image: productData.image,
-          price: productData.price,
+          productId: payload.id,
+          title: payload.title,
+          image: payload.image,
+          price: payload.price,
           qty: 1
         };
         state.cart.items.push(newItem);
       }
       state.cart.qty++;
-      state.cart.total += productData.price;
+      state.cart.total += payload.price;
     },
-    removeProductFromCart(state, prodId) {
+    removeProductFromCart(state, payload) {
       const productInCartIndex = state.cart.items.findIndex(
-        cartItem => cartItem.productId === prodId
+        cartItem => cartItem.productId === payload
       );
       const prodData = state.cart.items[productInCartIndex];
       state.cart.items.splice(productInCartIndex, 1);
